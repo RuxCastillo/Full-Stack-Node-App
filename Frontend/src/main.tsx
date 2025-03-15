@@ -6,6 +6,7 @@ import './css/reset.css';
 import './css/variables.css';
 import './css/fonts.css';
 import './css/base.css';
+import './css/spacing.css';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>

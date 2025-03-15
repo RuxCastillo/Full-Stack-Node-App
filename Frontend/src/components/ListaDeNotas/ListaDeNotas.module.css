@@ -1,0 +1,94 @@
+.section {
+	padding: var(--spacing-250) var(--spacing-200);
+	overflow: auto;
+	padding-bottom: 84px;
+	position: relative;
+}
+
+.h1 {
+	margin-bottom: 1rem;
+}
+
+.button {
+	width: 100%;
+	border: none;
+	background-color: var(--blue-500);
+	color: white;
+	padding: 12px 16px;
+	border-radius: var(--radius-8);
+	display: none;
+	margin-bottom: 1rem;
+}
+
+.nota {
+	padding: 8px;
+	border-bottom: 1px solid var(--neutral-200);
+}
+
+.nota__titulo {
+	margin-bottom: 12px;
+	font-weight: bold;
+}
+
+.nota__tags {
+	margin-bottom: 12px;
+}
+
+.tag {
+	background-color: var(--neutral-200);
+	padding: 2px 6px;
+	margin-right: 4px;
+	border-radius: var(--radius-4);
+}
+
+.fecha {
+	color: var(--neutral-700);
+}
+
+.circulo {
+	background-color: var(--blue-500);
+	position: fixed;
+	bottom: 72px;
+	right: 16px;
+	height: 3rem;
+	width: 3rem;
+	border-radius: var(--radius-full);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.plus {
+	height: 32px;
+	width: 32px;
+	filter: invert(100%) brightness(100%);
+}
+
+@media (min-width: 640px) {
+	.section {
+		padding: var(--spacing-300) var(--spacing-400);
+	}
+	.circulo {
+		height: 4rem;
+		width: 4rem;
+		right: 35px;
+		bottom: 100px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.section {
+		grid-column: 2/3;
+		grid-row: 2/3;
+		padding: 20px 16px 37px 32px;
+	}
+	.h1 {
+		display: none;
+	}
+	.button {
+		display: block;
+	}
+	.circulo {
+		display: none;
+	}
+}

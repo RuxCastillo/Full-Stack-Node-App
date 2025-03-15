@@ -1,0 +1,39 @@
+.nota {
+	padding: 20px 16px;
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	padding-bottom: 12px;
+	border-bottom: 1px solid var(--neutral-200);
+}
+
+.arrowLeft {
+	height: 18px;
+	width: 18px;
+}
+
+.goBack {
+	color: var(--neutral-600);
+	margin-right: auto;
+}
+
+.icon {
+	height: 18px;
+	width: 18px;
+	margin-right: 16px;
+}
+
+.nav__button {
+	background-color: transparent;
+	border: none;
+}
+
+.cancel {
+	color: var(--neutral-600);
+}
+
+.save {
+	color: var(--blue-500);
+}

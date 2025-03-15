@@ -1,3 +1,11 @@
 .main {
 	height: 100vh;
 }
+
+@media (min-width: 1024px) {
+	.main {
+		display: grid;
+		grid-template-columns: 19% 20% 41% auto;
+		grid-template-rows: 9% 91%;
+	}
+}
