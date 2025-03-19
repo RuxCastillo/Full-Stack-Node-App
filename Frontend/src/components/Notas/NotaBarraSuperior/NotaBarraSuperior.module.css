@@ -1,0 +1,48 @@
+.nav {
+	display: flex;
+	align-items: center;
+	padding-bottom: 12px;
+	border-bottom: 1px solid var(--neutral-200);
+}
+
+.arrowLeft {
+	height: 18px;
+	width: 18px;
+}
+
+.goBackDiv {
+	margin-right: auto;
+	display: flex;
+	align-items: center;
+}
+
+.goBack {
+	color: var(--neutral-600);
+}
+
+.icon {
+	height: 18px;
+	width: 18px;
+	margin-right: 16px;
+}
+
+.nav__button {
+	background-color: transparent;
+	border: none;
+	padding: 0;
+}
+
+.cancel {
+	color: var(--neutral-600);
+	margin-right: 1rem;
+}
+
+.save {
+	color: var(--blue-500);
+}
+
+@media (min-width: 1024px) {
+	.nav {
+		display: none;
+	}
+}
