@@ -1,6 +1,6 @@
 import styles from './ListaDeNotas.module.css';
-import plus from '../../assets/images/icon-plus.svg';
 import ElementoListaDeNotas from './ElementoListaDeNotas/ElementoListaDeNotas';
+import CirculoNuevaNota from '../CirculoNuevaNota/CirculoNuevaNota';
 
 export default function ListaDeNotas(): React.ReactElement {
 	return (
@@ -24,9 +24,7 @@ export default function ListaDeNotas(): React.ReactElement {
 			<ElementoListaDeNotas />
 			<ElementoListaDeNotas />
 			<ElementoListaDeNotas />
-			<div className={styles.circulo}>
-				<img className={styles.plus} src={plus} alt="" />
-			</div>
+			<CirculoNuevaNota />
 		</section>
 	);
 }

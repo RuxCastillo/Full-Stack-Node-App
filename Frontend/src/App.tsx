@@ -5,6 +5,9 @@ import Nota from './components/Notas/Notas.tsx';
 import NavegacionDesktop from './components/NavegacionDesktop/NavegacionDesktop.tsx';
 import styles from './App.module.css';
 import SideBar from './components/SideBar/SideBar.tsx';
+import TagsMobile from './components/TagsMobile/TagsMobile.tsx';
+import NotesTagged from './components/TagsMobile/NotesTagged/NotesTagged.tsx';
+import ArchivedNotes from './components/ArchivedNotes/ArchivedNotes';
 
 function App() {
 	return (
@@ -14,9 +17,11 @@ function App() {
 			{
 				//<Nota />
 				//<ListaDeNotas />
+				//<NavegacionDesktop />
+				//<NotesTagged />
 			}
+			<ArchivedNotes />
 			<BarraDeNavegacionInferior />
-			<NavegacionDesktop />
 		</main>
 	);
 }

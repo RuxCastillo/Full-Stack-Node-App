@@ -2,7 +2,7 @@ import logo from '../../assets/images/logo.svg';
 import styles from './SideBar.module.css';
 import homeIcon from '../../assets/images/icon-home.svg';
 import archiveIcon from '../../assets/images/icon-archive.svg';
-import tagIcon from '../../assets/images/icon-tag.svg';
+import Tags from '../Tags/Tags.tsx';
 
 export default function SideBar(): React.ReactElement {
 	return (
@@ -20,38 +20,14 @@ export default function SideBar(): React.ReactElement {
 					<span>Archived Notes</span>
 				</div>
 				<span className={`${styles.span} text-preset-4`}>Tags</span>
-				<div className={styles.element}>
-					<img src={tagIcon} alt="" />
-					<span>Cooking</span>
-				</div>
-				<div className={styles.element}>
-					<img src={tagIcon} alt="" />
-					<span>Cooking</span>
-				</div>
-				<div className={styles.element}>
-					<img src={tagIcon} alt="" />
-					<span>Cooking</span>
-				</div>
-				<div className={styles.element}>
-					<img src={tagIcon} alt="" />
-					<span>Cooking</span>
-				</div>
-				<div className={styles.element}>
-					<img src={tagIcon} alt="" />
-					<span>Cooking</span>
-				</div>
-				<div className={styles.element}>
-					<img src={tagIcon} alt="" />
-					<span>Cooking</span>
-				</div>
-				<div className={styles.element}>
-					<img src={tagIcon} alt="" />
-					<span>Cooking</span>
-				</div>
-				<div className={styles.element}>
-					<img src={tagIcon} alt="" />
-					<span>Cooking</span>
-				</div>
+				<Tags />
+				<Tags />
+				<Tags />
+				<Tags />
+				<Tags />
+				<Tags />
+				<Tags />
+				<Tags />
 			</section>
 		</>
 	);

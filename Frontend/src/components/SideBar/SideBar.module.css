@@ -16,15 +16,6 @@
 	display: none;
 }
 
-.element {
-	display: flex;
-	align-items: center;
-}
-
-.element img {
-	padding: 10px 8px 10px 12px;
-}
-
 .archive {
 	border-bottom: 1px solid var(--neutral-200);
 	padding-bottom: 16px;
@@ -34,4 +25,22 @@
 	display: block;
 	margin: 8px;
 	color: var(--neutral-500);
+}
+
+.element {
+	display: flex;
+	align-items: center;
+}
+
+.element img {
+	padding: 10px 8px 10px 12px;
+}
+
+@media (min-width: 1024px) {
+	.logoDiv {
+		display: flex;
+	}
+	.section {
+		display: block;
+	}
 }

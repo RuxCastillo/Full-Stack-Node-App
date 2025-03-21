@@ -1,0 +1,18 @@
+.element {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--neutral-200);
+}
+
+.element img {
+	padding: 14px 8px 14px 0;
+}
+
+@media (min-width: 1024px) {
+	.element {
+		border: none;
+	}
+	.element img {
+		padding: 10px 8px 10px 12px;
+	}
+}

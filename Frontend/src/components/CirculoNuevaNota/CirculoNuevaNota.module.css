@@ -1,0 +1,33 @@
+.circulo {
+	background-color: var(--blue-500);
+	position: fixed;
+	bottom: 72px;
+	right: 16px;
+	height: 3rem;
+	width: 3rem;
+	border-radius: var(--radius-full);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.plus {
+	height: 32px;
+	width: 32px;
+	filter: invert(100%) brightness(100%);
+}
+
+@media (min-width: 640px) {
+	.circulo {
+		height: 4rem;
+		width: 4rem;
+		right: 35px;
+		bottom: 100px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.circulo {
+		display: none;
+	}
+}
