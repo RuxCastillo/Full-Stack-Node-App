@@ -1,0 +1,35 @@
+.logoDiv {
+	grid-column: 1/2;
+	grid-row: 1/2;
+	display: flex;
+	align-items: center;
+	margin-left: 1rem;
+	border-right: 1px solid var(--neutral-200);
+}
+
+.section {
+	grid-column: 1/2;
+	grid-row: 2/3;
+	padding: 0 16px;
+	border-right: 1px solid var(--neutral-200);
+}
+
+.element {
+	display: flex;
+	align-items: center;
+}
+
+.element img {
+	padding: 10px 8px 10px 12px;
+}
+
+.archive {
+	border-bottom: 1px solid var(--neutral-200);
+	padding-bottom: 16px;
+}
+
+.span {
+	display: block;
+	margin: 8px;
+	color: var(--neutral-500);
+}
