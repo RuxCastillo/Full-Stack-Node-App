@@ -1,6 +1,7 @@
 .nota {
 	padding: 20px 16px;
 	position: relative;
+	border-right: 1px solid var(--neutral-200);
 }
 
 .title {
@@ -47,7 +48,7 @@ input:focus {
 	bottom: 0;
 	padding: 16px 24px 20px;
 	border-top: 1px solid var(--neutral-200);
-	width: 100%;
+	width: 94%;
 	background-color: white;
 	display: none;
 }
