@@ -8,6 +8,7 @@ import SideBar from './components/SideBar/SideBar.tsx';
 import TagsMobile from './components/TagsMobile/TagsMobile.tsx';
 import NotesTagged from './components/TagsMobile/NotesTagged/NotesTagged.tsx';
 import ArchivedNotes from './components/ArchivedNotes/ArchivedNotes';
+import Settings from './components/Settings/Settings.tsx';
 
 function App() {
 	return (
@@ -19,8 +20,9 @@ function App() {
 				//<ListaDeNotas />
 				//<NavegacionDesktop />
 				//<NotesTagged />
+				//<ArchivedNotes />
 			}
-			<ArchivedNotes />
+			<Settings />
 			<BarraDeNavegacionInferior />
 		</main>
 	);
