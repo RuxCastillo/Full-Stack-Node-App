@@ -12,14 +12,16 @@ import Settings from './components/Settings/Settings.tsx';
 import ChangePassword from './components/ChangePassword/ChangePassword.tsx';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from './store/store.tsx';
+import { AppDispatch, RootState } from './store/store.tsx';
+import { useDispatch } from 'react-redux';
+import { actualizarTodasNotas } from './store/reducer.tsx';
 
 function App() {
-	const [pantalla, setPantalla] = useState('home');
 	const [isLargeScreen, setIsLargeScreen] = useState<boolean>(
 		window.innerWidth > 1024
 	);
 	const elestado = useSelector((state: RootState) => state.nota);
+	const dispatch: AppDispatch = useDispatch();
 	console.log(elestado);
 
 	useEffect(() => {
@@ -28,6 +30,13 @@ function App() {
 		};
 
 		window.addEventListener('resize', handleResize);
+
+		async function leerJSON() {
+			const res = await fetch('/data.json');
+			const data = await res.json();
+			dispatch(actualizarTodasNotas(data.notes));
+		}
+		leerJSON();
 
 		return () => {
 			window.removeEventListener('resize', handleResize);
@@ -38,7 +47,9 @@ function App() {
 		<main className={styles.main}>
 			<BarraSuperior />
 			<SideBar />
-			{elestado.pantallaMostrada === 'home' && <ListaDeNotas />}
+			{(elestado.pantallaMostrada === 'home' || isLargeScreen) && (
+				<ListaDeNotas />
+			)}
 			{elestado.pantallaMostrada === 'tags' && <NotesTagged />}
 			{(elestado.pantallaMostrada === 'search' || isLargeScreen) && (
 				<NavegacionDesktop />
