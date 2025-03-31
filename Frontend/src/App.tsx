@@ -11,12 +11,16 @@ import ArchivedNotes from './components/ArchivedNotes/ArchivedNotes';
 import Settings from './components/Settings/Settings.tsx';
 import ChangePassword from './components/ChangePassword/ChangePassword.tsx';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from './store/store.tsx';
 
 function App() {
 	const [pantalla, setPantalla] = useState('home');
 	const [isLargeScreen, setIsLargeScreen] = useState<boolean>(
 		window.innerWidth > 1024
 	);
+	const elestado = useSelector((state: RootState) => state.nota);
+	console.log(elestado);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -30,25 +34,25 @@ function App() {
 		};
 	}, []);
 
-	function changePantalla(str: string) {
-		setPantalla(str);
-	}
-
 	return (
 		<main className={styles.main}>
 			<BarraSuperior />
 			<SideBar />
-			{pantalla === 'home' && <ListaDeNotas />}
-			{pantalla === 'tags' && <NotesTagged />}
-			{(pantalla === 'search' || isLargeScreen) && <NavegacionDesktop />}
-			{pantalla === 'archived' && <ArchivedNotes />}
-			{pantalla === 'settings' && <Settings />}
-			{(pantalla === 'nota abierta' || isLargeScreen) && <Nota />}
+			{elestado.pantallaMostrada === 'home' && <ListaDeNotas />}
+			{elestado.pantallaMostrada === 'tags' && <NotesTagged />}
+			{(elestado.pantallaMostrada === 'search' || isLargeScreen) && (
+				<NavegacionDesktop />
+			)}
+			{elestado.pantallaMostrada === 'archived' && <ArchivedNotes />}
+			{elestado.pantallaMostrada === 'settings' && <Settings />}
+			{(elestado.pantallaMostrada === 'nota abierta' || isLargeScreen) && (
+				<Nota />
+			)}
 			{
 				//<Nota />
 				//<ChangePassword />
 			}
-			<BarraDeNavegacionInferior changePantalla={changePantalla} />
+			<BarraDeNavegacionInferior />
 		</main>
 	);
 }

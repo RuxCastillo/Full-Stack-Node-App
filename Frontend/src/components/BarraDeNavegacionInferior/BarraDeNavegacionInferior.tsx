@@ -4,14 +4,20 @@ import archivado from '../../assets/images/icon-archive.svg';
 import tag from '../../assets/images/icon-tag.svg';
 import configuracion from '../../assets/images/icon-settings.svg';
 import styles from './BarraDeNavegacionInferior.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../store/store';
+import { cambiarPantalla } from '../../store/reducer';
 
-interface BarraDeNavegacionInferiorI {
-	changePantalla: (str: string) => void;
-}
+export default function BarraDeNavegacionInferior(): React.ReactElement {
+	const state = useSelector((state: RootState) => state.nota);
+	const dispatch: AppDispatch = useDispatch();
+	console.log(state);
 
-export default function BarraDeNavegacionInferior({
-	changePantalla,
-}: BarraDeNavegacionInferiorI): React.ReactElement {
+	function changePantalla(str: string) {
+		console.log('changePantalla activado');
+		dispatch(cambiarPantalla(str));
+	}
+
 	return (
 		<nav className={styles.nav}>
 			<div className={styles.div} onClick={() => changePantalla('home')}>
