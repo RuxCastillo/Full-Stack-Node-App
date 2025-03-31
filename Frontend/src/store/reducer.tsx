@@ -1,11 +1,13 @@
 interface State {
 	notaActual: object | null;
 	pantallaMostrada: string;
+	pantallaAnterior: string;
 }
 
 const initialState: State = {
 	notaActual: {},
 	pantallaMostrada: 'home',
+	pantallaAnterior: 'home',
 };
 
 const ACTUALIZAR_NOTA_ACTUAL = 'nota/actualizarNotaActual';
@@ -22,6 +24,7 @@ export const reducer = (state = initialState, action: any): State => {
 		case CAMBIAR_PANTALLA_MOSTRADA:
 			return {
 				...state,
+				pantallaAnterior: state.pantallaMostrada,
 				pantallaMostrada: action.payload,
 			};
 		default:
