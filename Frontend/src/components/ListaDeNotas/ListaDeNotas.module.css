@@ -1,7 +1,8 @@
 .section {
 	padding: var(--spacing-250) var(--spacing-200);
 	overflow: auto;
-	padding-bottom: 84px;
+	height: 100%;
+	padding-bottom: 184px;
 	position: relative;
 }
 
@@ -48,6 +49,7 @@
 @media (min-width: 640px) {
 	.section {
 		padding: var(--spacing-300) var(--spacing-400);
+		padding-bottom: 184px;
 	}
 }
 

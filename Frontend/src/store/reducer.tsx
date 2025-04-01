@@ -1,5 +1,5 @@
 interface State {
-	notaActual: object | null;
+	notaActual: Nota;
 	pantallaMostrada: string;
 	pantallaAnterior: string;
 	notas: Array<Nota>;
@@ -8,14 +8,21 @@ interface State {
 export interface Nota {
 	id: number;
 	title: string;
-	tags: Array<string>;
+	tags: Array<string> | string;
 	content: string;
 	lastEdited: string;
 	isArchived: boolean;
 }
 
 const initialState: State = {
-	notaActual: {},
+	notaActual: {
+		id: Math.floor(Math.random() * (1000 - 200 + 1)) + 200,
+		title: 'Enter title',
+		tags: 'Add tags separated by commas (e.g. Work, Planning)',
+		content: 'Start typing your note here...',
+		lastEdited: 'Not yet saved',
+		isArchived: false,
+	},
 	pantallaMostrada: 'home',
 	pantallaAnterior: 'home',
 	notas: [],
@@ -24,6 +31,7 @@ const initialState: State = {
 const ACTUALIZAR_NOTA_ACTUAL = 'nota/actualizarNotaActual';
 const CAMBIAR_PANTALLA_MOSTRADA = 'pantalla/cambiarPantalla';
 const ACTUALIZAR_TODAS_NOTAS = 'nota/actualizarTodasNotas';
+const PONER_NOTA_EN_PANTALLA = 'pantalla/ponerNotaEnPantalla';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const reducer = (state = initialState, action: any): State => {
@@ -39,11 +47,15 @@ export const reducer = (state = initialState, action: any): State => {
 				pantallaAnterior: state.pantallaMostrada,
 				pantallaMostrada: action.payload,
 			};
-
 		case ACTUALIZAR_TODAS_NOTAS:
 			return {
 				...state,
 				notas: action.payload,
+			};
+		case PONER_NOTA_EN_PANTALLA:
+			return {
+				...state,
+				notaActual: action.payload,
 			};
 		default:
 			return state;
@@ -63,4 +75,9 @@ export const cambiarPantalla = (string: string) => ({
 export const actualizarTodasNotas = (array: Array<Nota>) => ({
 	type: ACTUALIZAR_TODAS_NOTAS,
 	payload: array,
+});
+
+export const ponerNotaEnPantalla = (nota: object | null) => ({
+	type: PONER_NOTA_EN_PANTALLA,
+	payload: nota,
 });
