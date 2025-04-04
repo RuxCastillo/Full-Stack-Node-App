@@ -15,9 +15,11 @@ export default function ListaDeNotas(): React.ReactElement {
 	if (!state.notas || state.notas.length === 0) {
 		noNotas = <p>You dont have any notes yet</p>;
 	} else {
-		noNotas = state.notas.map((nota: Nota): React.ReactElement => {
-			return <ElementoListaDeNotas nota={nota} />;
-		});
+		noNotas = state.notas
+			.filter((nota) => !nota.isArchived)
+			.map((nota: Nota): React.ReactElement => {
+				return <ElementoListaDeNotas nota={nota} />;
+			});
 	}
 
 	return (

@@ -4,12 +4,13 @@ interface State {
 	pantallaAnterior: string;
 	notas: Array<Nota>;
 	todasLasNotas: Array<Nota>;
+	todosLosTags: string[];
 }
 
 export interface Nota {
 	id: number;
 	title: string;
-	tags: Array<string> | string;
+	tags: Array<string>;
 	content: string;
 	lastEdited: string;
 	isArchived: boolean;
@@ -28,6 +29,7 @@ const initialState: State = {
 	pantallaMostrada: 'home',
 	pantallaAnterior: 'home',
 	notas: [],
+	todosLosTags: [],
 };
 
 const ACTUALIZAR_NOTA_ACTUAL = 'nota/actualizarNotaActual';
@@ -37,6 +39,7 @@ const PONER_NOTA_EN_PANTALLA = 'pantalla/ponerNotaEnPantalla';
 const VOLVER_PANTALLA_ANTERIOR = 'pantalla/volverPantallaAnterior';
 const ACTUALIZAR_NOTAS = 'nota/actualizarListaDeNotas';
 const REGRESAR_TODAS_LAS_NOTAS = 'nota/regresarTodasLasNotas';
+const TODOS_LOS_TAGS = 'nota/todosLosTags';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const reducer = (state = initialState, action: any): State => {
@@ -79,6 +82,11 @@ export const reducer = (state = initialState, action: any): State => {
 				...state,
 				pantallaMostrada: state.pantallaAnterior,
 			};
+		case TODOS_LOS_TAGS:
+			return {
+				...state,
+				todosLosTags: action.payload,
+			};
 		default:
 			return state;
 	}
@@ -117,4 +125,9 @@ export const actualizarListaDeNotas = (array: Array<Nota>) => ({
 export const regresarTodasLasNotas = () => ({
 	type: REGRESAR_TODAS_LAS_NOTAS,
 	payload: null,
+});
+
+export const todosLosTagsRedux = (array: string[]) => ({
+	type: TODOS_LOS_TAGS,
+	payload: array,
 });

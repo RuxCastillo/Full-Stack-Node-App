@@ -7,10 +7,7 @@ import { Nota } from '../../store/reducer';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
-import {
-	actualizarListaDeNotas,
-	regresarTodasLasNotas,
-} from '../../store/reducer';
+import { actualizarListaDeNotas } from '../../store/reducer';
 
 export default function NavegacionDesktop() {
 	const state = useSelector((state: RootState) => state.nota);
@@ -62,10 +59,9 @@ export default function NavegacionDesktop() {
 				/>
 			</div>
 			<div className={styles.listaDeNotas}>
-				{resultadosFiltrados &&
-					resultadosFiltrados.map((nota) => {
-						return <ElementoListaDeNotas nota={nota} />;
-					})}
+				{resultadosFiltrados.map((nota) => {
+					return <ElementoListaDeNotas nota={nota} />;
+				})}
 			</div>
 		</section>
 	);

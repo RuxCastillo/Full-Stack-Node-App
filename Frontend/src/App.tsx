@@ -1,7 +1,7 @@
 import BarraDeNavegacionInferior from './components/BarraDeNavegacionInferior/BarraDeNavegacionInferior.tsx';
 import BarraSuperior from './components/BarraSuperior/BarraSuperior.tsx';
 import ListaDeNotas from './components/ListaDeNotas/ListaDeNotas.tsx';
-import Nota from './components/Notas/Notas.tsx';
+import Notas from './components/Notas/Notas.tsx';
 import NavegacionDesktop from './components/NavegacionDesktop/NavegacionDesktop.tsx';
 import styles from './App.module.css';
 import SideBar from './components/SideBar/SideBar.tsx';
@@ -14,7 +14,12 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './store/store.tsx';
 import { useDispatch } from 'react-redux';
-import { actualizarTodasNotas } from './store/reducer.tsx';
+import { Nota } from './store/reducer';
+import {
+	actualizarTodasNotas,
+	regresarTodasLasNotas,
+	todosLosTagsRedux,
+} from './store/reducer.tsx';
 
 function App() {
 	const [isLargeScreen, setIsLargeScreen] = useState<boolean>(
@@ -38,10 +43,32 @@ function App() {
 		}
 		leerJSON();
 
+		function todosLosTags() {
+			const arr: string[] = [];
+			elestado.todasLasNotas.forEach((nota: Nota) => {
+				if (!nota.isArchived) {
+					nota.tags.forEach((tag: string) => {
+						if (!arr.includes(tag)) {
+							arr.push(tag);
+						}
+					});
+				}
+			});
+			return arr;
+		}
+		const todosTags = todosLosTags();
+		dispatch(todosLosTagsRedux(todosTags));
+
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
+
+	useEffect(() => {
+		if (elestado.pantallaMostrada === 'home') {
+			dispatch(regresarTodasLasNotas());
+		}
+	}, [elestado.pantallaMostrada]);
 
 	return (
 		<main className={styles.main}>
@@ -50,14 +77,14 @@ function App() {
 			{(elestado.pantallaMostrada === 'home' || isLargeScreen) && (
 				<ListaDeNotas />
 			)}
-			{elestado.pantallaMostrada === 'tags' && <NotesTagged />}
+			{elestado.pantallaMostrada === 'tags' && <TagsMobile />}
 			{(elestado.pantallaMostrada === 'search' || isLargeScreen) && (
 				<NavegacionDesktop />
 			)}
 			{elestado.pantallaMostrada === 'archived' && <ArchivedNotes />}
 			{elestado.pantallaMostrada === 'settings' && <Settings />}
 			{(elestado.pantallaMostrada === 'nota abierta' || isLargeScreen) && (
-				<Nota />
+				<Notas />
 			)}
 			{
 				//<Nota />
