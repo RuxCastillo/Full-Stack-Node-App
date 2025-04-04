@@ -1,5 +1,5 @@
 import styles from '../ListaDeNotas.module.css';
-import { UseSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../../store/store';
 import { cambiarPantalla, ponerNotaEnPantalla } from '../../../store/reducer';
 import { Nota } from '../../../store/reducer';

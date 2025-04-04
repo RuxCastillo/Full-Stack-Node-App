@@ -3,10 +3,21 @@ import deleteIcon from '../../../assets/images/icon-delete.svg';
 import archive from '../../../assets/images/icon-archive.svg';
 import styles from './NotaBarraSuperior.module.css';
 
-export default function NotaBarraSuperior() {
+import { UseDispatch } from 'react-redux';
+import { AppDispatch } from '../../../store/store';
+import { useDispatch } from 'react-redux';
+import { volverPantallaAnterior } from '../../../store/reducer';
+
+export default function NotaBarraSuperior({ cancelNota }) {
+	const dispatch: AppDispatch = useDispatch();
+
+	function handleGoBackButton() {
+		dispatch(volverPantallaAnterior());
+	}
+
 	return (
 		<nav className={styles.nav}>
-			<div className={styles.goBackDiv}>
+			<div className={styles.goBackDiv} onClick={handleGoBackButton}>
 				<img src={arrowLeft} alt="go back" className={styles.arrowLeft} />
 				<span className={`${styles.goBack} text-preset-5`}>Go Back</span>
 			</div>
@@ -14,6 +25,7 @@ export default function NotaBarraSuperior() {
 			<img src={archive} alt="archive note" className={styles.icon} />
 			<button
 				className={`${styles.nav__button} ${styles.cancel} text-preset-5`}
+				onClick={cancelNota}
 			>
 				Cancel
 			</button>

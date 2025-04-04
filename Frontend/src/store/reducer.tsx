@@ -32,6 +32,7 @@ const ACTUALIZAR_NOTA_ACTUAL = 'nota/actualizarNotaActual';
 const CAMBIAR_PANTALLA_MOSTRADA = 'pantalla/cambiarPantalla';
 const ACTUALIZAR_TODAS_NOTAS = 'nota/actualizarTodasNotas';
 const PONER_NOTA_EN_PANTALLA = 'pantalla/ponerNotaEnPantalla';
+const VOLVER_PANTALLA_ANTERIOR = 'pantalla/volverPantallaAnterior';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const reducer = (state = initialState, action: any): State => {
@@ -57,6 +58,11 @@ export const reducer = (state = initialState, action: any): State => {
 				...state,
 				notaActual: action.payload,
 			};
+		case VOLVER_PANTALLA_ANTERIOR:
+			return {
+				...state,
+				pantallaMostrada: state.pantallaAnterior,
+			};
 		default:
 			return state;
 	}
@@ -80,4 +86,9 @@ export const actualizarTodasNotas = (array: Array<Nota>) => ({
 export const ponerNotaEnPantalla = (nota: object | null) => ({
 	type: PONER_NOTA_EN_PANTALLA,
 	payload: nota,
+});
+
+export const volverPantallaAnterior = () => ({
+	type: VOLVER_PANTALLA_ANTERIOR,
+	payload: null,
 });

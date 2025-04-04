@@ -4,13 +4,13 @@
 	border-right: 1px solid var(--neutral-200);
 	overflow-y: auto;
 	height: 100%;
-	padding-bottom: 184px;
 }
 
 .title {
 	margin-top: 12px;
 	border: none;
 	padding: 0;
+	width: 100%;
 }
 
 .info {
@@ -103,5 +103,8 @@ input:focus {
 	}
 	.buttons {
 		display: flex;
+	}
+	.textarea {
+		height: 60vh;
 	}
 }

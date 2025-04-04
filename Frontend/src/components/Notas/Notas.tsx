@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../../utils/convertirFecha';
-import { Nota } from '../../store/reducer';
+//import { Nota } from '../../store/reducer';
 
 export default function Notas() {
 	const state = useSelector((state: RootState) => state.nota);
@@ -21,16 +21,19 @@ export default function Notas() {
 		lastEdited: state.notaActual.lastEdited,
 		isArchived: state.notaActual.isArchived,
 	});
+	const [guardandoNota, setGuardandoNota] = useState(nota);
 
 	useEffect(() => {
-		setNota({
+		const nuevaNota = {
 			id: state.notaActual.id,
 			title: state.notaActual.title,
 			tags: state.notaActual.tags,
 			content: state.notaActual.content,
 			lastEdited: state.notaActual.lastEdited,
 			isArchived: state.notaActual.isArchived,
-		});
+		};
+		setNota(nuevaNota);
+		setGuardandoNota(nuevaNota);
 		window.scrollTo(0, 0);
 	}, [state.notaActual]);
 
@@ -41,11 +44,27 @@ export default function Notas() {
 		return arr.join(', ');
 	}
 
+	function handleChange(
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) {
+		const { name, value } = e.target;
+		setNota((prevState) => ({ ...prevState, [name]: value }));
+	}
+
+	function cancelNota() {
+		setNota(guardandoNota);
+	}
+
 	return (
 		<>
 			<section className={styles.nota}>
-				<NotaBarraSuperior />
-				<input value={nota.title} className={`${styles.title} text-preset-1`} />
+				<NotaBarraSuperior cancelNota={cancelNota} />
+				<input
+					value={nota.title}
+					className={`${styles.title} text-preset-1`}
+					name="title"
+					onChange={handleChange}
+				/>
 				<div className={`${styles.info} text-preset-6`}>
 					<div className={styles.infoTitle}>
 						<img src={tagsIcon} alt="" />
@@ -67,10 +86,11 @@ export default function Notas() {
 					</div>
 				</div>
 				<textarea
-					name=""
+					name="content"
 					id=""
 					className={`${styles.textarea} text-preset-5`}
 					value={nota.content}
+					onChange={handleChange}
 				></textarea>
 				<div className={styles.buttons}>
 					<button className={styles.save}>Save Note</button>
