@@ -3,6 +3,7 @@ interface State {
 	pantallaMostrada: string;
 	pantallaAnterior: string;
 	notas: Array<Nota>;
+	todasLasNotas: Array<Nota>;
 }
 
 export interface Nota {
@@ -23,6 +24,7 @@ const initialState: State = {
 		lastEdited: 'Not yet saved',
 		isArchived: false,
 	},
+	todasLasNotas: [],
 	pantallaMostrada: 'home',
 	pantallaAnterior: 'home',
 	notas: [],
@@ -33,6 +35,8 @@ const CAMBIAR_PANTALLA_MOSTRADA = 'pantalla/cambiarPantalla';
 const ACTUALIZAR_TODAS_NOTAS = 'nota/actualizarTodasNotas';
 const PONER_NOTA_EN_PANTALLA = 'pantalla/ponerNotaEnPantalla';
 const VOLVER_PANTALLA_ANTERIOR = 'pantalla/volverPantallaAnterior';
+const ACTUALIZAR_NOTAS = 'nota/actualizarListaDeNotas';
+const REGRESAR_TODAS_LAS_NOTAS = 'nota/regresarTodasLasNotas';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const reducer = (state = initialState, action: any): State => {
@@ -51,7 +55,19 @@ export const reducer = (state = initialState, action: any): State => {
 		case ACTUALIZAR_TODAS_NOTAS:
 			return {
 				...state,
+				todasLasNotas: action.payload,
 				notas: action.payload,
+			};
+
+		case ACTUALIZAR_NOTAS:
+			return {
+				...state,
+				notas: action.payload,
+			};
+		case REGRESAR_TODAS_LAS_NOTAS:
+			return {
+				...state,
+				notas: state.todasLasNotas,
 			};
 		case PONER_NOTA_EN_PANTALLA:
 			return {
@@ -90,5 +106,15 @@ export const ponerNotaEnPantalla = (nota: object | null) => ({
 
 export const volverPantallaAnterior = () => ({
 	type: VOLVER_PANTALLA_ANTERIOR,
+	payload: null,
+});
+
+export const actualizarListaDeNotas = (array: Array<Nota>) => ({
+	type: ACTUALIZAR_NOTAS,
+	payload: array,
+});
+
+export const regresarTodasLasNotas = () => ({
+	type: REGRESAR_TODAS_LAS_NOTAS,
 	payload: null,
 });

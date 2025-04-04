@@ -1,30 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import searchIcon from '../../assets/images/icon-search.svg';
 import settingsIcon from '../../assets/images/icon-settings.svg';
 import ElementoListaDeNotas from '../ListaDeNotas/ElementoListaDeNotas/ElementoListaDeNotas';
 import styles from './NavegacionDesktop.module.css';
+import { Nota } from '../../store/reducer';
 
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../store/store';
+import {
+	actualizarListaDeNotas,
+	regresarTodasLasNotas,
+} from '../../store/reducer';
 
 export default function NavegacionDesktop() {
 	const state = useSelector((state: RootState) => state.nota);
+	const dispatch: AppDispatch = useDispatch();
 	const [searchInput, setSearchInput] = useState('');
+	const [resultadosFiltrados, setResultadosFiltrados] = useState<Nota[]>([]);
 
 	function handleChangeSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
 		setSearchInput(e.target.value);
 	}
 
-	let resultadosFiltrados;
+	useEffect(() => {
+		if (searchInput !== '') {
+			const filtrados = state.todasLasNotas.filter(
+				(item) =>
+					item.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+					item.content.toLowerCase().includes(searchInput.toLowerCase())
+			);
+			setResultadosFiltrados(filtrados);
+		}
+	}, [searchInput, state.todasLasNotas]);
 
-	if (searchInput !== '') {
-		resultadosFiltrados = state.notas.filter(
-			(item) =>
-				item.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-				item.content.toLowerCase().includes(searchInput.toLowerCase())
-		);
-	}
-
+	useEffect(() => {
+		dispatch(actualizarListaDeNotas(resultadosFiltrados));
+	}, [resultadosFiltrados, dispatch]);
 	console.log(state, 'el state del buscador');
 
 	return (
