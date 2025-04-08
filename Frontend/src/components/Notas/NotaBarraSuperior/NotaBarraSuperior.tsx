@@ -8,7 +8,11 @@ import { AppDispatch } from '../../../store/store';
 import { useDispatch } from 'react-redux';
 import { volverPantallaAnterior } from '../../../store/reducer';
 
-export default function NotaBarraSuperior({ cancelNota }) {
+export default function NotaBarraSuperior({
+	cancelNota,
+	handleClickArchived,
+	deleteNote,
+}) {
 	const dispatch: AppDispatch = useDispatch();
 
 	function handleGoBackButton() {
@@ -21,8 +25,18 @@ export default function NotaBarraSuperior({ cancelNota }) {
 				<img src={arrowLeft} alt="go back" className={styles.arrowLeft} />
 				<span className={`${styles.goBack} text-preset-5`}>Go Back</span>
 			</div>
-			<img src={deleteIcon} alt="delete note" className={styles.icon} />
-			<img src={archive} alt="archive note" className={styles.icon} />
+			<img
+				src={deleteIcon}
+				alt="delete note"
+				className={styles.icon}
+				onClick={deleteNote}
+			/>
+			<img
+				src={archive}
+				alt="archive note"
+				className={styles.icon}
+				onClick={handleClickArchived}
+			/>
 			<button
 				className={`${styles.nav__button} ${styles.cancel} text-preset-5`}
 				onClick={cancelNota}

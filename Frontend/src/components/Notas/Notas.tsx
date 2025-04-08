@@ -10,9 +10,15 @@ import { RootState, AppDispatch } from '../../store/store';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../../utils/convertirFecha';
 //import { Nota } from '../../store/reducer';
+import {
+	archivarNotaEnTodasNotas,
+	deleteNoteRedux,
+	volverPantallaAnterior,
+} from '../../store/reducer';
 
 export default function Notas() {
 	const state = useSelector((state: RootState) => state.nota);
+	const dispatch: AppDispatch = useDispatch();
 	const [nota, setNota] = useState({
 		id: state.notaActual.id,
 		title: state.notaActual.title,
@@ -55,10 +61,23 @@ export default function Notas() {
 		setNota(guardandoNota);
 	}
 
+	function handleClickArchived() {
+		dispatch(archivarNotaEnTodasNotas(nota.id));
+	}
+
+	function deleteNote() {
+		dispatch(deleteNoteRedux(nota.id));
+		dispatch(volverPantallaAnterior());
+	}
+
 	return (
 		<>
 			<section className={styles.nota}>
-				<NotaBarraSuperior cancelNota={cancelNota} />
+				<NotaBarraSuperior
+					cancelNota={cancelNota}
+					handleClickArchived={handleClickArchived}
+					deleteNote={deleteNote}
+				/>
 				<input
 					value={nota.title}
 					className={`${styles.title} text-preset-1`}
@@ -85,24 +104,26 @@ export default function Notas() {
 							: formatDate(nota.lastEdited)}
 					</div>
 				</div>
-				<textarea
-					name="content"
-					id=""
-					className={`${styles.textarea} text-preset-5`}
-					value={nota.content}
-					onChange={handleChange}
-				></textarea>
-				<div className={styles.buttons}>
-					<button className={styles.save}>Save Note</button>
-					<button className={styles.cancel}>Cancel</button>
+				<div className={styles.textareaANDbuttons}>
+					<textarea
+						name="content"
+						id=""
+						className={`${styles.textarea} text-preset-5`}
+						value={nota.content}
+						onChange={handleChange}
+					></textarea>
+					<div className={styles.buttons}>
+						<button className={styles.save}>Save Note</button>
+						<button className={styles.cancel}>Cancel</button>
+					</div>
 				</div>
 			</section>
 			<div className={`${styles.noteSideBar} text-preset-4`}>
-				<div className={styles.noteSideBarSquare}>
+				<div className={styles.noteSideBarSquare} onClick={handleClickArchived}>
 					<img src={archiveIcon} alt="" />
 					Archive Note
 				</div>
-				<div className={styles.noteSideBarSquare}>
+				<div className={styles.noteSideBarSquare} onClick={deleteNote}>
 					<img src={deleteIcon} alt="" />
 					Delete Note
 				</div>

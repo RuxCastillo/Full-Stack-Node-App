@@ -43,6 +43,8 @@ const ACTUALIZAR_NOTAS = 'nota/actualizarListaDeNotas';
 const REGRESAR_TODAS_LAS_NOTAS = 'nota/regresarTodasLasNotas';
 const TODOS_LOS_TAGS = 'nota/todosLosTags';
 const TAG_SELECCIONADO = 'pantalla/tagSeleccionado';
+const ARCHIVAR_NOTA_EN_TODAS_NOTAS = 'nota/archivarNotaEnTodasLasNotas';
+const DELETE_NOTE = 'nota/borrarNota';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const reducer = (state = initialState, action: any): State => {
@@ -95,6 +97,38 @@ export const reducer = (state = initialState, action: any): State => {
 				...state,
 				tagSeleccionado: action.payload,
 			};
+		case ARCHIVAR_NOTA_EN_TODAS_NOTAS: {
+			return {
+				...state,
+				todasLasNotas: state.todasLasNotas.map((nota) =>
+					nota.id === action.payload
+						? { ...nota, isArchived: !nota.isArchived } // Cambia el valor de isArchived
+						: nota
+				),
+				notas: state.notas.map((nota) =>
+					nota.id === action.payload
+						? { ...nota, isArchived: !nota.isArchived } // Cambia también en el array `notas` si es necesario
+						: nota
+				),
+			};
+		}
+		case DELETE_NOTE: {
+			return {
+				...state,
+				todasLasNotas: state.todasLasNotas.filter(
+					(nota) => nota.id !== action.payload
+				),
+				notas: state.notas.filter((nota) => nota.id !== action.payload),
+				notaActual: {
+					id: Math.floor(Math.random() * (1000 - 200 + 1)) + 200,
+					title: 'Enter title',
+					tags: 'Add tags separated by commas (e.g. Work, Planning)',
+					content: 'Start typing your note here...',
+					lastEdited: 'Not yet saved',
+					isArchived: false,
+				},
+			};
+		}
 		default:
 			return state;
 	}
@@ -143,4 +177,14 @@ export const todosLosTagsRedux = (array: string[]) => ({
 export const tagSeleccionado = (str: string | null) => ({
 	type: TAG_SELECCIONADO,
 	payload: str,
+});
+
+export const archivarNotaEnTodasNotas = (num: number) => ({
+	type: ARCHIVAR_NOTA_EN_TODAS_NOTAS,
+	payload: num,
+});
+
+export const deleteNoteRedux = (num: number) => ({
+	type: DELETE_NOTE,
+	payload: num,
 });

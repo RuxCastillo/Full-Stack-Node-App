@@ -32,6 +32,7 @@ function App() {
 	useEffect(() => {
 		const handleResize = () => {
 			setIsLargeScreen(window.innerWidth > 1024);
+			dispatch(regresarTodasLasNotas());
 		};
 
 		window.addEventListener('resize', handleResize);
@@ -52,7 +53,7 @@ function App() {
 		function todosLosTags() {
 			const arr: string[] = [];
 			elestado.todasLasNotas.forEach((nota: Nota) => {
-				if (!nota.isArchived) {
+				if (!nota.isArchived && Array.isArray(nota.tags)) {
 					nota.tags.forEach((tag: string) => {
 						if (!arr.includes(tag)) {
 							arr.push(tag);
