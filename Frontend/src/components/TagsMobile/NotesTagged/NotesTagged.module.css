@@ -1,5 +1,7 @@
 .section {
 	padding: 20px 16px;
+	overflow: auto;
+	height: 90%;
 	padding-bottom: 200px;
 }
 
@@ -34,11 +36,12 @@
 @media (min-width: 640px) {
 	.section {
 		padding: 24px 32px;
+		padding-bottom: 200px;
 	}
 }
 
 @media (min-width: 1024px) {
-	.sectoin {
+	.section {
 		display: none;
 	}
 }
