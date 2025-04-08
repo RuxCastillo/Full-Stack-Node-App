@@ -1,5 +1,8 @@
 .section {
 	padding: 20px 16px;
+	overflow: auto;
+	height: 100%;
+	padding-bottom: 200px;
 }
 
 .h3 {
@@ -10,5 +13,6 @@
 @media (min-width: 640px) {
 	.section {
 		padding: 24px 32px;
+		padding-bottom: 200px;
 	}
 }

@@ -5,12 +5,13 @@ interface State {
 	notas: Array<Nota>;
 	todasLasNotas: Array<Nota>;
 	todosLosTags: string[];
+	tagSeleccionado: string | null;
 }
 
 export interface Nota {
 	id: number;
 	title: string;
-	tags: Array<string>;
+	tags: Array<string> | string;
 	content: string;
 	lastEdited: string;
 	isArchived: boolean;
@@ -30,6 +31,7 @@ const initialState: State = {
 	pantallaAnterior: 'home',
 	notas: [],
 	todosLosTags: [],
+	tagSeleccionado: null,
 };
 
 const ACTUALIZAR_NOTA_ACTUAL = 'nota/actualizarNotaActual';
@@ -40,6 +42,7 @@ const VOLVER_PANTALLA_ANTERIOR = 'pantalla/volverPantallaAnterior';
 const ACTUALIZAR_NOTAS = 'nota/actualizarListaDeNotas';
 const REGRESAR_TODAS_LAS_NOTAS = 'nota/regresarTodasLasNotas';
 const TODOS_LOS_TAGS = 'nota/todosLosTags';
+const TAG_SELECCIONADO = 'pantalla/tagSeleccionado';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const reducer = (state = initialState, action: any): State => {
@@ -87,6 +90,11 @@ export const reducer = (state = initialState, action: any): State => {
 				...state,
 				todosLosTags: action.payload,
 			};
+		case TAG_SELECCIONADO:
+			return {
+				...state,
+				tagSeleccionado: action.payload,
+			};
 		default:
 			return state;
 	}
@@ -130,4 +138,9 @@ export const regresarTodasLasNotas = () => ({
 export const todosLosTagsRedux = (array: string[]) => ({
 	type: TODOS_LOS_TAGS,
 	payload: array,
+});
+
+export const tagSeleccionado = (str: string | null) => ({
+	type: TAG_SELECCIONADO,
+	payload: str,
 });

@@ -43,6 +43,12 @@ function App() {
 		}
 		leerJSON();
 
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, [dispatch]);
+
+	useEffect(() => {
 		function todosLosTags() {
 			const arr: string[] = [];
 			elestado.todasLasNotas.forEach((nota: Nota) => {
@@ -57,18 +63,17 @@ function App() {
 			return arr;
 		}
 		const todosTags = todosLosTags();
-		dispatch(todosLosTagsRedux(todosTags));
 
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
+		if (JSON.stringify(todosTags) !== JSON.stringify(elestado.todosLosTags)) {
+			dispatch(todosLosTagsRedux(todosTags));
+		}
+	}, [elestado.todosLosTags, dispatch, elestado.todasLasNotas]);
 
 	useEffect(() => {
 		if (elestado.pantallaMostrada === 'home') {
 			dispatch(regresarTodasLasNotas());
 		}
-	}, [elestado.pantallaMostrada]);
+	}, [elestado.pantallaMostrada, dispatch]);
 
 	return (
 		<main className={styles.main}>
@@ -77,7 +82,9 @@ function App() {
 			{(elestado.pantallaMostrada === 'home' || isLargeScreen) && (
 				<ListaDeNotas />
 			)}
-			{elestado.pantallaMostrada === 'tags' && <TagsMobile />}
+			{elestado.pantallaMostrada === 'tags' && !elestado.tagSeleccionado && (
+				<TagsMobile />
+			)}
 			{(elestado.pantallaMostrada === 'search' || isLargeScreen) && (
 				<NavegacionDesktop />
 			)}
@@ -85,6 +92,9 @@ function App() {
 			{elestado.pantallaMostrada === 'settings' && <Settings />}
 			{(elestado.pantallaMostrada === 'nota abierta' || isLargeScreen) && (
 				<Notas />
+			)}
+			{elestado.pantallaMostrada === 'tags' && elestado.tagSeleccionado && (
+				<NotesTagged />
 			)}
 			{
 				//<Nota />
