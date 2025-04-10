@@ -27,7 +27,6 @@ function App() {
 	);
 	const elestado = useSelector((state: RootState) => state.nota);
 	const dispatch: AppDispatch = useDispatch();
-	console.log(elestado);
 
 	useEffect(() => {
 		const handleResize = () => {

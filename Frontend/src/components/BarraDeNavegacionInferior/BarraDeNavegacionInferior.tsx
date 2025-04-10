@@ -11,10 +11,8 @@ import { cambiarPantalla } from '../../store/reducer';
 export default function BarraDeNavegacionInferior(): React.ReactElement {
 	const state = useSelector((state: RootState) => state.nota);
 	const dispatch: AppDispatch = useDispatch();
-	console.log(state);
 
 	function changePantalla(str: string) {
-		console.log('changePantalla activado');
 		dispatch(cambiarPantalla(str));
 	}
 

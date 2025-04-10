@@ -26,9 +26,10 @@ export default function SideBar(): React.ReactElement {
 
 	function handleClickTag(str: string) {
 		const res = state.todasLasNotas.filter((nota) => {
-			return nota.tags.some((tag) => str === tag);
+			if (Array.isArray(nota.tags)) {
+				return nota.tags.some((tag) => str === tag);
+			}
 		});
-		console.log('las notas con tag filtrados', res);
 		dispatch(actualizarListaDeNotas(res));
 	}
 

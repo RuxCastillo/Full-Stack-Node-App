@@ -33,7 +33,6 @@ export default function NavegacionDesktop() {
 	useEffect(() => {
 		dispatch(actualizarListaDeNotas(resultadosFiltrados));
 	}, [resultadosFiltrados, dispatch]);
-	console.log(state, 'el state del buscador');
 
 	return (
 		<section className={styles.section}>
