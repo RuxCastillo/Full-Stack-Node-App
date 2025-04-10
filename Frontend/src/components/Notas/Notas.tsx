@@ -14,6 +14,7 @@ import {
 	archivarNotaEnTodasNotas,
 	deleteNoteRedux,
 	volverPantallaAnterior,
+	saveNote,
 } from '../../store/reducer';
 
 export default function Notas() {
@@ -70,6 +71,10 @@ export default function Notas() {
 		dispatch(volverPantallaAnterior());
 	}
 
+	function saveNota() {
+		dispatch(saveNote(nota));
+	}
+
 	return (
 		<>
 			<section className={styles.nota}>
@@ -113,8 +118,12 @@ export default function Notas() {
 						onChange={handleChange}
 					></textarea>
 					<div className={styles.buttons}>
-						<button className={styles.save}>Save Note</button>
-						<button className={styles.cancel}>Cancel</button>
+						<button className={styles.save} onClick={saveNota}>
+							Save Note
+						</button>
+						<button className={styles.cancel} onClick={cancelNota}>
+							Cancel
+						</button>
 					</div>
 				</div>
 			</section>

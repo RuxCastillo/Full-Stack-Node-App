@@ -22,6 +22,10 @@ export default function SideBar(): React.ReactElement {
 
 	function handleClickArchivedNotes() {
 		dispatch(cambiarPantalla('archived'));
+		const todasLasArchived = state.todasLasNotas.filter(
+			(nota) => nota.isArchived
+		);
+		dispatch(actualizarListaDeNotas(todasLasArchived));
 	}
 
 	function handleClickTag(str: string) {

@@ -40,6 +40,7 @@ function App() {
 			const res = await fetch('/data.json');
 			const data = await res.json();
 			dispatch(actualizarTodasNotas(data.notes));
+			dispatch(regresarTodasLasNotas());
 		}
 		leerJSON();
 

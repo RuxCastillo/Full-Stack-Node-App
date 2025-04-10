@@ -45,6 +45,7 @@ const TODOS_LOS_TAGS = 'nota/todosLosTags';
 const TAG_SELECCIONADO = 'pantalla/tagSeleccionado';
 const ARCHIVAR_NOTA_EN_TODAS_NOTAS = 'nota/archivarNotaEnTodasLasNotas';
 const DELETE_NOTE = 'nota/borrarNota';
+const SAVE_NOTE = 'nota/saveNota';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const reducer = (state = initialState, action: any): State => {
@@ -75,7 +76,7 @@ export const reducer = (state = initialState, action: any): State => {
 		case REGRESAR_TODAS_LAS_NOTAS:
 			return {
 				...state,
-				notas: state.todasLasNotas,
+				notas: state.todasLasNotas.filter((nota) => !nota.isArchived),
 			};
 		case PONER_NOTA_EN_PANTALLA:
 			return {
@@ -126,6 +127,21 @@ export const reducer = (state = initialState, action: any): State => {
 					content: 'Start typing your note here...',
 					lastEdited: 'Not yet saved',
 					isArchived: false,
+				},
+			};
+		}
+		case SAVE_NOTE: {
+			return {
+				...state,
+				todasLasNotas: state.todasLasNotas.map((nota: Nota) =>
+					nota.id === action.payload.id ? { ...nota, ...action.payload } : nota
+				),
+				notas: state.notas.map((nota) =>
+					nota.id === action.payload.id ? { ...nota, ...action.payload } : nota
+				),
+				notaActual: {
+					...state.notaActual,
+					...action.payload,
 				},
 			};
 		}
@@ -187,4 +203,9 @@ export const archivarNotaEnTodasNotas = (num: number) => ({
 export const deleteNoteRedux = (num: number) => ({
 	type: DELETE_NOTE,
 	payload: num,
+});
+
+export const saveNote = (nota: Nota) => ({
+	type: SAVE_NOTE,
+	payload: nota,
 });
