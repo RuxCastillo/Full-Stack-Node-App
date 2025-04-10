@@ -82,6 +82,7 @@ export default function Notas() {
 					cancelNota={cancelNota}
 					handleClickArchived={handleClickArchived}
 					deleteNote={deleteNote}
+					saveNota={saveNota}
 				/>
 				<input
 					value={nota.title}
